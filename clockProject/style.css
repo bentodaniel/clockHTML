@@ -1,0 +1,80 @@
+/* Header */
+#header { position:fixed; top:0; left:0; background:#808080; margin:0 auto; padding:0; width:100%; height:9%; }
+
+/* Logo */
+#logo { padding:10px 5px 10px 15%; height:70%; float:left; }
+
+/* Menu */
+#top-nav { padding:10px 15% 10px 5px; float:right; }
+#top-nav ul { list-style:none; padding:0; float:left; }
+#top-nav ul li { float:left; }
+#top-nav ul li a { display:block; margin:0; padding:0px 20px; color:#000000; text-decoration:none; }
+#top-nav ul li.active a, #top-nav ul li a:hover { color:#ffffff; }
+
+/* Footer */
+#footer { position: fixed; left: 0; bottom: 0; background: #808080; width: 100%; height: 3%; }
+
+/* Footer Text */
+#ftText { float: right; padding:0 3% 0 0; margin: 3px 0 0 3px; }
+
+/* Content */
+#content { position:fixed; top:9%; left:0; width:100%; height:88%; }
+
+#clock{
+    position: relative;
+    top:0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* background */
+.bg {
+  /* The image used */
+  background-image: url("background.jpg");
+
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#timestamp { position:absolute; top:26%; width:100%; text-align:center; color: white; line-height: 0.01; }
+#hoursContent { font-size: 750%; }
+#daysContent{ font-size: 300%; }
+
+#clockButtons{
+    position: absolute;
+    top: 3%;
+    right: 3%;
+}
+
+.btn {
+    width: 150px;
+    height: 30px;
+}
+
+#txtArea {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    height: 75%;
+    width: 90%;
+    font-size: medium;
+}
+
+#notesButtons{
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+    width: 90.5%;
+}
+
+.save {
+    position: absolute;
+    right: 0;
+}
