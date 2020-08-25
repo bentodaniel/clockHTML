@@ -209,6 +209,86 @@ function startAlarm(){
 		changeTimerDiv("alarm");
 	}
 
+	var h = + document.getElementById("alarmHours").value;
+	var m = + document.getElementById("alarmMinutes").value;
+	var s = + document.getElementById("alarmSeconds").value;
+
+	if (h >= 24 || m >= 60 || s >= 60){
+		return;
+	}
+
+	var nowDate = new Date()
+	var hour = nowDate.getHours();
+	var minute = nowDate.getMinutes();
+	var second = nowDate.getSeconds();
+
+	var setDate = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), h, m, s, 0);
+
+	//See how much time is left from now to the defined time
+	if (h < hour || (h == hour && m < minute) || (h == hour && m == minute && s < second)){
+		//The given time is the next day
+		setDate.setDate(nowDate.getDate() + 1);
+	}
+
+	var totaltime = (setDate.getTime() - nowDate.getTime()) / 1000;
+
+	var helper = totaltime;
+
+	// Time calculations for hours, minutes and seconds
+	h = Math.floor(helper / (60 * 60));
+	helper = helper % (60 * 60);
+	m = Math.floor(helper / 60);
+	helper = helper % 60;
+	s = Math.floor(helper);
+
+	if (h < 10 ){
+		h = '0' + h;
+	}
+	if (m < 10 ) {
+		m = '0' + m; 
+	}
+	if (s < 10){
+		s = '0' + s;
+	}
+
+	totaltime --;
+
+	document.getElementById("timerValue").innerHTML = h + ":" + m + ":" + s;
+
+	clearInterval(currentTimer);
+
+	// Update the count down every 1 second
+	currentTimer = setInterval(function() {
+	    helper = totaltime;
+
+	    // Time calculations for hours, minutes and seconds
+	    var hours = Math.floor(helper / (60 * 60));
+	    helper = helper % (60 * 60);
+	    var minutes = Math.floor(helper / 60);
+	    helper = helper % 60;
+	    var seconds = Math.floor(helper);
+
+	    if (hours < 10 ){
+			hours = '0' + hours;
+		}
+		if (minutes < 10 ) {
+			minutes = '0' + minutes; 
+		}
+		if (seconds < 10){
+			seconds = '0' + seconds;
+		}
+	    
+	    // Output the result in an element with id="demo"
+	    document.getElementById("timerValue").innerHTML = hours + ":" + minutes + ":" + seconds;
+	    
+	    // If the count down is over, write some text 
+	    if (totaltime <= 0) {
+	        clearInterval(currentTimer);
+	        document.getElementById("timerValue").innerHTML = "EXPIRED";
+	    }
+	    totaltime --;
+	}, 1000);
+
 	//TODO
 }
 
