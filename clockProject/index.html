@@ -54,7 +54,49 @@
 			</div>
 
 			<div id='timer' style="display: none">
-				I AM TIMER
+				<div class="timerdivHorizontal" id="divHorizontal">
+					<div id="countdown" class="timerdivSelected">
+						<div class="content">
+							<input class="timerInput" type="number" id="countdownHours" placeholder="h">
+							:
+							<input class="timerInput" type="number" id="countdownMinutes" placeholder="m">
+							:
+							<input class="timerInput" type="number" id="countdownSeconds" placeholder="s">
+
+							<br><br>
+
+							<button type="button" class="btn" onclick="startCountdown()"><i class='fa fa-play'></i> Start Countdown</button>
+						</div>
+					</div>
+
+					<div id="alarm">
+						<div class="content">
+							<input class="timerInput" type="number" id="alarmHours" placeholder="h">
+							:
+							<input class="timerInput" type="number" id="alarmMinutes" placeholder="m">
+							:
+							<input class="timerInput" type="number" id="alarmSeconds" placeholder="s">
+
+							<br><br>
+
+							<button type="button" class="btn" onclick="startAlarm()"><i class='fa fa-play'></i> Start Alarm</button>
+						</div>
+					</div>
+
+					<div id="stopwatch">
+						<div class="content">
+							<button type="button" class="btn" onclick="startStopwatch()"><i class='fa fa-play'></i> Start Stopwatch</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="timerdivVertical" id="divVertical">
+					<div class="verticalContent">
+						<span id='timerValue'>00</span>
+						<br>
+						<button type="button" class="btn" onclick="stopTimer()"><i class='fa fa-stop'></i> Stop</button>
+					</div>
+				</div>
 			</div>
 
 			<div id='notes' style="display: none">

@@ -5,6 +5,8 @@ var isFullScreen = false;
 var isExpanded = false;
 var textSizes = ["xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large"];
 var currentIndex = 3;
+var currentTimerDiv = "countdown";
+var currentTimer;
 
 function display_c() {
 	var refresh = 1000; // Refresh rate in milli seconds
@@ -41,6 +43,7 @@ function changeContent(id) {
 		document.getElementById(currentDivID).style.display = "none";
 	  	document.getElementById(id).style.display = "block";
 	  	currentDivID = id;
+	  	stopTimer();
 	}
 }
 
@@ -129,4 +132,143 @@ function saveText() {
     document.body.appendChild(anchor);
     anchor.click();
     document.body.removeChild(anchor);
+}
+
+function startCountdown(){
+	if (currentTimerDiv != "countdown"){
+		changeTimerDiv("countdown");
+	}
+
+	var h = + document.getElementById("countdownHours").value;
+	var m = + document.getElementById("countdownMinutes").value;
+	var s = + document.getElementById("countdownSeconds").value;
+
+	var totaltime = s + (m * 60) + (h * 60 * 60);
+
+	if (s >= 60){
+		m = m + Math.floor(s / 60);
+		s = s % 60;
+	}
+
+	if (m >= 60){
+		h = h + Math.floor(m / 60);
+		m = m % 60;
+	}
+
+	if (h < 10 ){
+		h = '0' + h;
+	}
+	if (m < 10 ) {
+		m = '0' + m; 
+	}
+	if (s < 10){
+		s = '0' + s;
+	}
+
+	totaltime --;
+
+	document.getElementById("timerValue").innerHTML = h + ":" + m + ":" + s;
+
+	clearInterval(currentTimer);
+
+	// Update the count down every 1 second
+	currentTimer = setInterval(function() {
+	    var helper = totaltime;
+
+	    // Time calculations for hours, minutes and seconds
+	    var hours = Math.floor(helper / (60 * 60));
+	    helper = helper % (60 * 60);
+	    var minutes = Math.floor(helper / 60);
+	    helper = helper % 60;
+	    var seconds = Math.floor(helper);
+
+	    if (hours < 10 ){
+			hours = '0' + hours;
+		}
+		if (minutes < 10 ) {
+			minutes = '0' + minutes; 
+		}
+		if (seconds < 10){
+			seconds = '0' + seconds;
+		}
+	    
+	    // Output the result in an element with id="demo"
+	    document.getElementById("timerValue").innerHTML = hours + ":" + minutes + ":" + seconds;
+	    
+	    // If the count down is over, write some text 
+	    if (totaltime <= 0) {
+	        clearInterval(currentTimer);
+	        document.getElementById("timerValue").innerHTML = "EXPIRED";
+	    }
+	    totaltime --;
+	}, 1000);
+}
+
+function startAlarm(){
+	if (currentTimerDiv != "alarm"){
+		changeTimerDiv("alarm");
+	}
+
+	//TODO
+}
+
+function startStopwatch(){
+	if (currentTimerDiv != "stopwatch"){
+		changeTimerDiv("stopwatch");
+	}
+
+	var totaltime = 1;
+
+	document.getElementById("timerValue").innerHTML = "00:00:00";
+
+	clearInterval(currentTimer);
+
+	// Update the count down every 1 second
+	currentTimer = setInterval(function() {
+	    var helper = totaltime;
+
+	    // Time calculations for hours, minutes and seconds
+	    var hours = Math.floor(helper / (60 * 60));
+	    helper = helper % (60 * 60);
+	    var minutes = Math.floor(helper / 60);
+	    helper = helper % 60;
+	    var seconds = Math.floor(helper);
+
+	    if (hours < 10 ){
+			hours = '0' + hours;
+		}
+		if (minutes < 10 ) {
+			minutes = '0' + minutes; 
+		}
+		if (seconds < 10){
+			seconds = '0' + seconds;
+		}
+	    
+	    // Output the result in an element with id="demo"
+	    document.getElementById("timerValue").innerHTML = hours + ":" + minutes + ":" + seconds;
+	    
+	    totaltime ++;
+	}, 1000);
+}
+
+function changeTimerDiv(newDiv){
+	document.getElementById(currentTimerDiv).classList.remove("timerdivSelected");
+	document.getElementById(newDiv).className = "timerdivSelected";
+	var vertivalValue;
+	if(newDiv == "countdown"){
+		vertivalValue = "15%";
+	}
+	else if (newDiv == "alarm"){
+		vertivalValue = "38.3%";
+	}
+	else{
+		vertivalValue = "61.6%";
+	}
+	document.getElementById("divVertical").style.left = vertivalValue;
+	currentTimerDiv = newDiv;
+}
+
+function stopTimer(){
+	clearInterval(currentTimer);
+	document.getElementById("timerValue").innerHTML = "EXPIRED";
 }
