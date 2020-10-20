@@ -43,9 +43,18 @@ function changeContent(id) {
 		document.getElementById(currentDivID).style.display = "none";
 	  	document.getElementById(id).style.display = "block";
 	  	currentDivID = id;
-	  	stopTimer();
+		stopTimer();
+		
+		if (currentDivID == "world") {
+			getTimesTimeZones();
+		}  
 	}
 }
+
+
+/*
+ * Clock functions
+ */
 
 function toggleFullscreen() {
 	if (!isFullScreen){
@@ -77,7 +86,7 @@ function toggleFullscreen() {
 	}
 }
 
-function toggleExpanced() {
+function toggleExpanded() {
 	elem = document.getElementById("content");
 
 	if (!isExpanded){
@@ -92,47 +101,19 @@ function toggleExpanced() {
 	}
 }
 
-function decreaseTextSize(){
-	if (currentIndex > 0){
-		document.getElementById("txtArea").style.fontSize = textSizes[currentIndex - 1];
-		currentIndex = currentIndex - 1;
 
-		if (currentIndex == 0){
-			document.getElementById("decreaseSize").disabled = true;
-		}
-		if (document.getElementById("increaseSize").disabled == true){
-			document.getElementById("increaseSize").disabled = false;
-		}
-	}
+/*
+ * World Clock functions
+ */
+
+function getTimesTimeZones(){
+	
 }
 
-function increaseTextSize(){
-	if (currentIndex < 6){
-		document.getElementById("txtArea").style.fontSize = textSizes[currentIndex + 1];
-		currentIndex = currentIndex + 1;
 
-		if (currentIndex == 6){
-			document.getElementById("increaseSize").disabled = true;
-		}
-		if (document.getElementById("decreaseSize").disabled == true){
-			document.getElementById("decreaseSize").disabled = false;
-		}
-	}
-}
-
-function saveText() {
-	var text = document.getElementById("txtArea").value;
-    text = text.replace(/\n/g, "\r\n"); // To retain the Line breaks.
-    var blob = new Blob([text], { type: "text/plain"});
-    var anchor = document.createElement("a");
-    anchor.download = "notes.txt";
-    anchor.href = window.URL.createObjectURL(blob);
-    anchor.target ="_blank";
-    anchor.style.display = "none"; // just to be safe!
-    document.body.appendChild(anchor);
-    anchor.click();
-    document.body.removeChild(anchor);
-}
+/*
+ * Timer functions
+ */
 
 function startCountdown(){
 	if (currentTimerDiv != "countdown"){
@@ -351,4 +332,51 @@ function changeTimerDiv(newDiv){
 function stopTimer(){
 	clearInterval(currentTimer);
 	document.getElementById("timerValue").innerHTML = "EXPIRED";
+}
+
+
+/*
+ * Notes functions
+ */
+
+function decreaseTextSize(){
+	if (currentIndex > 0){
+		document.getElementById("txtArea").style.fontSize = textSizes[currentIndex - 1];
+		currentIndex = currentIndex - 1;
+
+		if (currentIndex == 0){
+			document.getElementById("decreaseSize").disabled = true;
+		}
+		if (document.getElementById("increaseSize").disabled == true){
+			document.getElementById("increaseSize").disabled = false;
+		}
+	}
+}
+
+function increaseTextSize(){
+	if (currentIndex < 6){
+		document.getElementById("txtArea").style.fontSize = textSizes[currentIndex + 1];
+		currentIndex = currentIndex + 1;
+
+		if (currentIndex == 6){
+			document.getElementById("increaseSize").disabled = true;
+		}
+		if (document.getElementById("decreaseSize").disabled == true){
+			document.getElementById("decreaseSize").disabled = false;
+		}
+	}
+}
+
+function saveText() {
+	var text = document.getElementById("txtArea").value;
+    text = text.replace(/\n/g, "\r\n"); // To retain the Line breaks.
+    var blob = new Blob([text], { type: "text/plain"});
+    var anchor = document.createElement("a");
+    anchor.download = "notes.txt";
+    anchor.href = window.URL.createObjectURL(blob);
+    anchor.target ="_blank";
+    anchor.style.display = "none"; // just to be safe!
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
 }

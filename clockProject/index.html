@@ -8,8 +8,9 @@
 
 		<link rel="stylesheet" type="text/css" href="style.css">
 
-		<script src="clockScript.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
 		<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+		<script src="clockScript.js"></script>
 	</head>
 
 	<body>
@@ -36,7 +37,7 @@
 				<div class="bg"></div>
 				
 				<div id="clockButtons">
-					<button type="button" class="btn" onclick="toggleExpanced()"><i class='fas fa-expand'></i> Toggle Headers</button>
+					<button type="button" class="btn" onclick="toggleExpanded()"><i class='fas fa-expand'></i> Toggle Headers</button>
 					<br><br>
 					<button type="button" class="btn" onclick="toggleFullscreen()"><i class='fas fa-external-link-alt'></i> Toggle Fullscreen</button>
 				</div>
@@ -50,7 +51,36 @@
 			</div>
 
 			<div id='world' style="display: none">
-				I AM WORLD CLOCK
+				<div class="world_clock_title">
+					<h1>World Clock</h1>
+					<span>Change a time to use as Time Zone Converter</span>
+				</div>
+
+				<div class="world_clock_content">
+					<div id="world_clock_1">
+						<h2>Local Time</h2>
+						<br>
+						<input class="world_clock_input" id="time_zone_local">
+					</div>
+
+					<div id="world_clock_2">
+						<h2>Greenwich Mean Time</h2>
+						<br>
+						<input class="world_clock_input" id="time_zone_gmt">
+					</div>
+
+					<div id="world_clock_3">
+						<h2>Pacific Daylight Time</h2>
+						<br>
+						<input class="world_clock_input" id="time_zone_pdt">
+					</div>
+
+					<div id="world_clock_4">
+						<h2>Hong Kong Time</h2>
+						<br>
+						<input class="world_clock_input" id="time_zone_hkt">
+					</div>
+				</div>
 			</div>
 
 			<div id='timer' style="display: none">
