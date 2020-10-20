@@ -107,7 +107,36 @@ function toggleExpanded() {
  */
 
 function getTimesTimeZones(){
-	
+	var local = document.getElementById("time_zone_local");
+	var gmt = document.getElementById("time_zone_gmt");
+	var pdt = document.getElementById("time_zone_pdt");
+	var hkt = document.getElementById("time_zone_hkt");
+
+	local.value = getTime(false, 0);
+	gmt.value = getTime(true, 0);
+	pdt.value = getTime(true, -7);
+	hkt.value = getTime(true, 8);
+}
+
+function getTime(has_offset, offset){
+	// create Date object for current location
+    var d = new Date();
+
+	var value = d.toLocaleString([], {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute:'2-digit'});
+
+	if (has_offset){
+		// convert to msec
+		// subtract local time zone offset
+		// get UTC time in msec
+		var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+
+		// create new Date object for different city
+		// using supplied offset
+		var nd = new Date(utc + (3600000 * offset));
+
+		value = nd.toLocaleString([], {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute:'2-digit'});
+	}
+	return value;
 }
 
 
